@@ -1,0 +1,17 @@
+Filter
+Ingredient                      i=INGREDIENT 
+Alcoholic                       a=ALCOHOLIC OR NON_ALCOHOLIC
+Glass                           g=TYPE OF GLASS
+
+
+List the categories, glasses, ingredients or alcoholic filters
+www.thecocktaildb.com/api/json/v1/1/list.php?c=list
+www.thecocktaildb.com/api/json/v1/1/list.php?g=list
+www.thecocktaildb.com/api/json/v1/1/list.php?i=list
+www.thecocktaildb.com/api/json/v1/1/list.php?a=list
+
+Search cocktail by name
+www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
+
+Lookup full cocktail details by id
+www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
