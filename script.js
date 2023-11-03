@@ -19,3 +19,9 @@ function getCocktailOptions(){
 function getDrinkID(name){
 
 }
+
+
+// Home button function on the saved-combos HTML
+document.getElementById("#homeButton").addEventListener("click", function() {
+    window.location.href = "PATH TO HOME PAGE";
+});
