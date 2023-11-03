@@ -57,8 +57,26 @@ document.addEventListener("selectionchange", function (event){
 }
 
 
+// Function for save button that puts it to local storage and then pushes to saved-combos html
+function saveMyCombo() {
+    
+}
+
+
+// Reset button function, resets to default - need to add ' onclick="resetChoices()" ' to reset button in HTML
+function resetChoices() {
+    location.reload();
+}
+
+// Button that takes you to saved combos - need to add ' onclick="goToSaved()" ' to Saved Pairings button in HTML
+function goToSaved() {
+    window.location.href = "./saved-combos.html"
+}
+
 // Home button function on the saved-combos HTML
-document.getElementById("#homeButton").addEventListener("click", function() {
+function returnHome() {
     window.location.href = "PATH TO HOME PAGE";
+}
 });
+
 
