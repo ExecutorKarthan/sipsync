@@ -43,6 +43,7 @@ function getMealList(selectedCategory, drinkIngredient){
     })
 }
 
+
 document.addEventListener("selectionchange", function (event){
     var selectedItem = event.target.value
     if(drinkToMealMap.has(selectedItem)){
@@ -53,3 +54,11 @@ document.addEventListener("selectionchange", function (event){
     }
     halt = false;
 })
+}
+
+
+// Home button function on the saved-combos HTML
+document.getElementById("#homeButton").addEventListener("click", function() {
+    window.location.href = "PATH TO HOME PAGE";
+});
+
