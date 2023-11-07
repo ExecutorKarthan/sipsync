@@ -54,14 +54,35 @@ document.addEventListener("selectionchange", function (event){
     }
     halt = false;
 })
-}
 
 
-// Function for save button that puts it to local storage and then pushes to saved-combos html
+
+
+// Function for save button that puts it to local storage
 function saveMyCombo() {
-    
+    var savedDrink = document.getElementById("").value;
+    var savedFood = document.getElementById("").value;
+    var savedPairing = savedFood + " - " + savedDrink;
+
+    localStorage.setItem("savedPairing", savedPairing);
+    window.location.href = "./saved-combos.html";
 }
 
+// Function that looks for page load, then pulls from local storage, and puts that into a list on the page
+document.addEventListener("DOMContentLoaded", function() {
+    var savedPairing = localStorage.getItem("savedPairing");
+    if (savedPairing) {
+        var savedComboList = document.getElementById("savedComboList");
+        var listItem = document.createElement("li");
+        listItem.appendChild(document.createTextNode(savedPairing));
+        savedComboList.appendChild(listItem);
+    } else {
+        var savedComboList = document.getElementById("savedComboList");
+        var noneListItem = document.createElement("li");
+        noneListItem.appendChild(document.createTextNode("No saved combos!"));
+        savedComboList.appendChild(noneListItem);
+    }
+});
 
 // Reset button function, resets to default - need to add ' onclick="resetChoices()" ' to reset button in HTML
 function resetChoices() {
@@ -75,8 +96,7 @@ function goToSaved() {
 
 // Home button function on the saved-combos HTML
 function returnHome() {
-    window.location.href = "PATH TO HOME PAGE";
+    window.location.href = "./index.html";
 }
-});
 
 
