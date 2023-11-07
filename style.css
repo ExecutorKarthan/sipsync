@@ -1,0 +1,18 @@
+.savedBodyP {
+    text-align: center;
+    padding: 20px;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+#savedComboList {
+    text-align: center;
+    font-weight: bold;
+    border: solid black;
+}
+
+#savedComboList li {
+    padding: 20px;
+    border: solid red;
+    font-size: 140%;
+}
