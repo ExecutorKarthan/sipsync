@@ -6,44 +6,53 @@ var mealToDrinkVal = [["Seafood", "Vodka"], ["Lamb", "Gin"], ["Beef", "Whiskey"]
 var mealToDrinkMap = new Map(mealToDrinkVal);
 var halt = false;
 
-function getCocktailOptions(selectedIngredient, mealCategory){
+function getCocktailOptions(selectedIngredient, selectedDrinkCategory, selectedMealParing){
     var cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + selectedIngredient;
-    if(selectedCategory != None){
-        cocktailURL = cocktailURL + "&c=" + selectedCategory;
+    console.log(cocktailURL)
+    console.log(selectedDrinkCategory)
+    if(selectedDrinkCategory != null){
+        cocktailURL = cocktailURL + "&c=" + selectedDrinkCategory;
     }
+    console.log(selectedDrinkCategory)
     fetch(cocktailURL)
     .then(function (response){
         return response.json();
     }).then(function (data){
-        for(var i = 0; index < 5; i++){
-            cocktailIDs.set(data[i].strDrink, data[i].idDrink);
+        console.log(data.drinks[1])
+        for(var i = 0; i < 5; i++){
+            console.log(data.drinks[i].strDrink + "  and  " + data.drinks[i].idDrink)
+            cocktailIDs.set(data.drinks[i].strDrink, data.drinks[i].idDrink);
             /*Assign values to the box(s)*/
         }
         if(!halt){
             halt = true
-            getMealList(mealCategory, selectedIngredient);
+            console.log(selectedMealParing)
+            getMealList(selectedMealParing);
         }
     })
 }
 
-function getMealList(selectedCategory, drinkIngredient){
-    var mealURL = "www.themealdb.com/api/json/v1/1/filter.php?c=" + selectedCategory;
+function getMealList(mealCategory, drinkPairing){
+    var mealURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealCategory;
     fetch(mealURL)
     .then(function (response){
         return response.json();
     }).then(function (data){
-        for(var i = 0; index < 5; i++){
-            mealIDs.set(data[i].strMeal, data[i].idMeal);
+        for(var i = 0; i < 5; i++){
+            console.log(data.meals[i].strMeal + "  and  " + data.meals[i].idMeal)
+            mealIDs.set(data.meals[i].strMeal, data.meals[i].idMeal);
             /*Assign values to the box(s)*/
         }
         if(!halt){
             halt = true
-            getCocktailOptions(drinkIngredient, selectedCategory);
+            //Get data for drink category
+            var selectedDrinkCategory = "Shot"
+            getCocktailOptions(drinkPairing, selectedDrinkCategory);
         }
     })
 }
 
-
+/*
 document.addEventListener("selectionchange", function (event){
     var selectedItem = event.target.value
     if(drinkToMealMap.has(selectedItem)){
@@ -54,7 +63,25 @@ document.addEventListener("selectionchange", function (event){
     }
     halt = false;
 })
+*/
+
+function test(){
+    var selectedItem = "Whiskey"
+    var selectedDrinkCategory = "Ordinary Drink"
+    if(drinkToMealMap.has(selectedItem)){
+        console.log("Drink is " + selectedItem)
+        console.log("Drink map response " + drinkToMealMap.get(selectedItem))
+        console.log(selectedDrinkCategory)
+        getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
+    }
+    else{
+        getMealList(selectedItem, mealToDrinkMap.get(selectedItem));
+    }
+    halt = false;
 }
+
+test()
+
 
 
 // Function for save button that puts it to local storage and then pushes to saved-combos html
@@ -76,7 +103,6 @@ function goToSaved() {
 // Home button function on the saved-combos HTML
 function returnHome() {
     window.location.href = "PATH TO HOME PAGE";
-}
-});
+};
 
 
