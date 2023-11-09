@@ -75,29 +75,47 @@ document.addEventListener("click", function (event){
 
 // Function for save button that puts it to local storage
 function saveMyCombo() {
-    var savedDrink = document.getElementById("").value;
-    var savedFood = document.getElementById("").value;
-    var savedPairing = savedFood + " - " + savedDrink;
+    var savedDrink = document.querySelector('input[name="radio-group"]:checked + span').innerText;
+    var savedDrinkType = document.querySelector('input[name="radio-group2"]:checked + span').innerText;
+    var savedFood
+    var savedPairing = savedDrinkType + " of " + savedDrink + " | " + savedFood;
+    var existingSavedPairings = localStorage.getItem("savedPairings");
 
-    localStorage.setItem("savedPairing", savedPairing);
-    window.location.href = "./saved-combos.html";
+    // If there are no existing saved combinations, create an empty array
+    if (!existingSavedPairings) {
+        existingSavedPairings = [];
+    } else {
+        existingSavedPairings = JSON.parse(existingSavedPairings);
+    }
+    // Add the new combination to the list of saved combinations
+    existingSavedPairings.push(savedPairing);
+    // Store the updated list back in local storage
+    localStorage.setItem("savedPairings", JSON.stringify(existingSavedPairings));
+
+    resetChoices();
 }
 
-// Function that looks for page load, then pulls from local storage, and puts that into a list on the page
+
+// Function that looks for page load, retrieves saved combinations from local storage, and displays them in a list
 document.addEventListener("DOMContentLoaded", function() {
-    var savedPairing = localStorage.getItem("savedPairing");
-    if (savedPairing) {
-        var savedComboList = document.getElementById("savedComboList");
-        var listItem = document.createElement("li");
-        listItem.appendChild(document.createTextNode(savedPairing));
-        savedComboList.appendChild(listItem);
+    var savedPairings = localStorage.getItem("savedPairings");
+    var savedComboList = document.getElementById("savedComboList");
+
+
+    if (savedPairings) {
+        var pairings = JSON.parse(savedPairings);
+        pairings.forEach(function (pairing) {
+            var listItem = document.createElement("li");
+            listItem.appendChild(document.createTextNode(pairing));
+            savedComboList.appendChild(listItem);
+        });
     } else {
-        var savedComboList = document.getElementById("savedComboList");
-        var noneListItem = document.createElement("li");
-        noneListItem.appendChild(document.createTextNode("No saved combos!"));
-        savedComboList.appendChild(noneListItem);
+        var listItem = document.createElement("li");
+        listItem.appendChild(document.createTextNode("No saved combos!"));
+        savedComboList.appendChild(listItem);
     }
 });
+
 
 // Reset button function, resets to default - need to add ' onclick="resetChoices()" ' to reset button in HTML
 function resetChoices() {
@@ -113,5 +131,3 @@ function goToSaved() {
 function returnHome() {
     window.location.href = "./index.html";
 }
-
-
