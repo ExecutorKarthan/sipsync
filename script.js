@@ -53,13 +53,22 @@ function getMealList(mealCategory, drinkPairing){
 }
 
 
-document.addEventListener("selectionchange", function (event){
-    var selectedItem = event.target.value
+document.addEventListener("click", function (event){
+    var selectedItem = "";
+    var buttonComplex = document.getElementById(event.target.id).parentNode.children;
+    console.log(buttonComplex[0].checked)
+    if(buttonComplex[0].checked){
+        selectedItem = buttonComplex[1].innerHTML
+    }
+    console.log(selectedItem)
     if(drinkToMealMap.has(selectedItem)){
         getCocktailOptions(selectedItem, drinkToMealMap.get(selectedItem));
     }
-    else{
+    if(mealToDrinkMap.has(selectedItem)){
         getMealList(selectedItem, mealToDrinkMap.get(selectedItem));
+    }
+    else{
+        pass;
     }
     halt = false;
 })
