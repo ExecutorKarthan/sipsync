@@ -4,29 +4,28 @@ var drinkToMealVal = [["Vodka", "Seafood"], ["Gin", "Lamb"], ["Whiskey", "Beef"]
 var drinkToMealMap = new Map(drinkToMealVal);
 var mealToDrinkVal = [["Seafood", "Vodka"], ["Lamb", "Gin"], ["Beef", "Whiskey"], ["Dessert", "Brandy"]]
 var mealToDrinkMap = new Map(mealToDrinkVal);
+var categoryVal = [["Party Drink", true], ["Shot", true], ["Cocktail", true], ["Ordinary Drink", true]]
+var categoryMap = new Map(categoryVal);
 var halt = false;
 
 function getCocktailOptions(selectedIngredient, selectedDrinkCategory, selectedMealParing){
     var cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + selectedIngredient;
-    console.log(cocktailURL)
-    console.log(selectedDrinkCategory)
-    if(selectedDrinkCategory != null){
+    if(selectedDrinkCategory != ""){
         cocktailURL = cocktailURL + "&c=" + selectedDrinkCategory;
     }
-    console.log(selectedDrinkCategory)
     fetch(cocktailURL)
     .then(function (response){
-        return response.json();
+        return response.json()
     }).then(function (data){
-        console.log(data.drinks[1])
-        for(var i = 0; i < 5; i++){
-            console.log(data.drinks[i].strDrink + "  and  " + data.drinks[i].idDrink)
+        maxVal = data.drinks.length
+        if(maxVal > 5){
+            maxVal = 5;
+        }
+        for(var i = 0; i < maxVal; i++){
             cocktailIDs.set(data.drinks[i].strDrink, data.drinks[i].idDrink);
-            /*Assign values to the box(s)*/
         }
         if(!halt){
             halt = true
-            console.log(selectedMealParing)
             getMealList(selectedMealParing);
         }
     })
@@ -39,7 +38,6 @@ function getMealList(mealCategory, drinkPairing){
         return response.json();
     }).then(function (data){
         for(var i = 0; i < 5; i++){
-            console.log(data.meals[i].strMeal + "  and  " + data.meals[i].idMeal)
             mealIDs.set(data.meals[i].strMeal, data.meals[i].idMeal);
             /*Assign values to the box(s)*/
         }
@@ -52,23 +50,28 @@ function getMealList(mealCategory, drinkPairing){
     })
 }
 
-
-document.addEventListener("click", function (event){
+var search = document.getElementById("search")
+search.addEventListener("click", function (){
     var selectedItem = "";
-    var buttonComplex = document.getElementById(event.target.id).parentNode.children;
-    console.log(buttonComplex[0].checked)
-    if(buttonComplex[0].checked){
-        selectedItem = buttonComplex[1].innerHTML
-    }
-    console.log(selectedItem)
+    var selectedDrinkCategory ="";
+    var buttonComplex = document.getElementById("radioContainer").children.length
+    for(var i= 0; i< buttonComplex-1; i++){   
+        var inputBox = document.getElementById("radio"+(i+1).toString()).parentNode.children
+        if(inputBox[0].checked && drinkToMealMap.has(inputBox[1].innerHTML)){
+            selectedItem = inputBox[1].innerHTML
+        }
+        if(inputBox[0].checked && categoryMap.has(inputBox[1].innerHTML)){
+            selectedDrinkCategory = inputBox[1].innerHTML
+        }
+    };
     if(drinkToMealMap.has(selectedItem)){
-        getCocktailOptions(selectedItem, drinkToMealMap.get(selectedItem));
+        getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
     }
     if(mealToDrinkMap.has(selectedItem)){
         getMealList(selectedItem, mealToDrinkMap.get(selectedItem));
     }
     else{
-        pass;
+        console.log("Nothing selected")
     }
     halt = false;
 })
