@@ -16,3 +16,8 @@
     border: solid red;
     font-size: 140%;
 }
+
+#returnHomeBtn {
+    font-size: 200%;
+    cursor: pointer;
+}
