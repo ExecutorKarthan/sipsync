@@ -83,62 +83,62 @@
         <!-- Drink Result Buttons -->
         <div id="drinkResults" class="flex flex-col items-end mb-4 mr-4 justify-center">
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="drinkOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="drinkOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="drinkOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="drinkOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="drinkOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
         </div>
         <!--Food Results Buttons-->
-        <div id="foodResults" class="flex flex-col items-end mb-4 mr-4 justify-end">
+        <div id="mealResults" class="flex flex-col items-end mb-4 mr-4 justify-center">
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="mealOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="mealOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="mealOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="mealOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
             <div class="mb-2">
-                <button class="invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                <button class="mealOutput invisible bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
             </div>
         </div>
     
     </div>
-    <!--Saearch Button-->
+    <!--Search Button-->
     <div id="search" class="mb-4 inline-block">
         <div class="ml-auto mt-4 mr-4 inline-block">
             <button class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
@@ -155,20 +155,18 @@
         </div>
     </div>
     <!--Output Card-->
-    <div class="min-h-screen flex justify-center items-center inline-block">
-        <!--
-        <div class="max-w-sm rounded overflow-hidden shadow-lg absolute top-1/2 transform -translate-y-1/2">
-          <img class="w-full" src= img url here alt=Card Image here
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Card Title</div>
-            <p class="text-gray-700 text-base">
-             content of card goes here
-            </p>
-          </div>
-        -->
+    <div id="cardContainer" class="grid grid-cols-3 flex flex-wrap">
+        <div id="emptyBlock">
+        </div>
+        <div id="drinkBlock">
+            <h2 id="drinkHeader"></h2>
+            <img id="drinkIMG">
+        </div>
+        <div id="mealBlock">
+            <h2 id="mealHeader"></h2>
+            <img id="mealIMG">
+        </div>
     </div>
-      
-      
       <script src ="script.js"></script>
 </body>
 

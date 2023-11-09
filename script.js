@@ -7,19 +7,21 @@ var mealToDrinkVal = [["Seafood", "Vodka"], ["Lamb", "Gin"], ["Beef", "Whiskey"]
 var mealToDrinkMap = new Map(mealToDrinkVal);
 var categoryVal = [["Homemade Liqueur", true], ["Shot", true], ["Cocktail", true], ["Ordinary Drink", true]]
 var categoryMap = new Map(categoryVal);
+var drinkResults = document.getElementById("drinkResults")
+var mealResults = document.getElementById("mealResults")
 
 //Create a halt variable to prevent infinite looping
 var halt = false;
 
 //Create a function retrieve cocktail data
-function getCocktailOptions(selectedIngredient, selectedDrinkCategory, selectedMealParing){
+async function getCocktailOptions(selectedIngredient, selectedDrinkCategory, selectedMealParing){
     //Build a cocktail url based on selected ingredients and possibly category
     var cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + selectedIngredient;
     if(selectedDrinkCategory != ""){
         cocktailURL = cocktailURL + "&c=" + selectedDrinkCategory;
     }
     //Query the website to get the needed cocktail data
-    fetch(cocktailURL)
+    await fetch(cocktailURL)
     .then(function (response){
         return response.json()
     }).then(function (data){
@@ -44,17 +46,17 @@ function getCocktailOptions(selectedIngredient, selectedDrinkCategory, selectedM
 }
 
 //Create a function to retrieve meal data
-function getMealList(mealCategory, drinkPairing, selectedDrinkCategory){
+async function getMealList(mealCategory, drinkPairing, selectedDrinkCategory){
     //Build the url to search for meals
     var mealURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealCategory;
     //Query the website to ge the needed cocktail data
-    fetch(mealURL)
+    await fetch(mealURL)
     .then(function (response){
         return response.json();
     }).then(function (data){
         //Determine the maximum length of items returned. If that value is larger than 5, set it to five. If not, only display what is present.
         maxVal = data.meals.length
-        var foodButtonContainer = document.querySelector("#foodResults").children
+        var foodButtonContainer = document.querySelector("#mealResults").children
         if(maxVal > 5){
             maxVal = 5;
         }
@@ -76,7 +78,7 @@ function getMealList(mealCategory, drinkPairing, selectedDrinkCategory){
 var search = document.getElementById("search")
 
 //Run the main function on click of the search button
-search.addEventListener("click", function (){
+search.addEventListener("click", async function (){
     var selectedItem = "";
     var selectedDrinkCategory ="";
     //Get a list of all radio buttons to test for true and to get their text values
@@ -99,16 +101,50 @@ search.addEventListener("click", function (){
     };
     //Call the appropriate function to get the cocktail or meal based on previous input
     if(drinkToMealMap.has(selectedItem)){
-        getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
+        await getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
+        console.log("Drink picked")
     }
     if(mealToDrinkMap.has(selectedItem)){
-        getMealList(selectedItem, mealToDrinkMap.get(selectedItem), selectedDrinkCategory);
+        await getMealList(selectedItem, mealToDrinkMap.get(selectedItem), selectedDrinkCategory);
+        console.log("food picked")
     }
     else{
-        console.log("Nothing selected")
+        return
     }
     //Reset the halt value so the next submission can be done
     halt = false;
+    
+})
+
+drinkResults.addEventListener("click", async function(event){
+    //Create a web query based on the item ID
+    var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + cocktailIDs.get(event.target.innerHTML);
+    //Query the website to get the needed cocktail data. Add an if to slow the request and prevent doubles
+    fetch(idURL).then(function(response){
+        return response.json()
+    }).then(function (data){
+        var title = document.getElementById("drinkHeader")
+        title.innerHTML = data.drinks[0].strDrink
+        var img = document.getElementById("drinkIMG")
+        img.src=data.drinks[0].strDrinkThumb
+    })
+})
+
+console.log(mealResults)
+mealResults.addEventListener("click", async function(event){
+    //Create a web query based on the item ID
+    var idURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealIDs.get(event.target.innerHTML);
+    //Query the website to get the needed cocktail data. Add an if to slow the request and prevent doubles
+    console.log(idURL)
+    fetch(idURL).then(function(response){
+        return response.json()
+    }).then(function (data){
+        console.log(data)
+        var title = document.getElementById("mealHeader")
+        title.innerHTML = data.meals[0].strMeal
+        var img = document.getElementById("mealIMG")
+        img.src=data.meals[0].strMealThumb
+    })
 })
 
 // Function for save button that puts it to local storage
