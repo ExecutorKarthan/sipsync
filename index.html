@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SipSync</title>
-
+<!--TailwindCSS Style Sheet-->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
 </head>
-
+<!--Background color and title text-->
 <body class="h-screen bg-gradient-to-b from-gray-300 to-gray-600">
     <div class="bg-black dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
         <div>
@@ -22,7 +22,8 @@
             SipSync
         </p>
     </div>
-    <!--Radios1-->
+    <div id="mainContainer" class="grid grid-cols-3 flex flex-wrap">
+
 
 <div id="radioContainer" class="ml-4 mt-4">
     <label for="radio" class="flex items-center inline-block">
@@ -70,9 +71,67 @@
     <!--buttons container -->
     <div class="flex justify-end mt-4 relative ml-20 mr-20">
    
+
+        <!--Radios1-->
+    <div class="flex flex-col items-start mb-4 ml-4 justify-start">
+        
+        <label for="radio" class="flex items-center inline-block">
+            <input type="radio" id="radio1" name="radio-group" class="form-radio text-indigo-600 h-5 w-5">
+            <span class="ml-2 text-gray-700">Radio Option</span>
+          </label>
+          <label for="radio" class="flex items-center inline-block">
+            <input type="radio" id="radio2" name="radio-group" class="form-radio text-indigo-600 h-5 w-5">
+            <span class="ml-2 text-gray-700">Radio Option</span>
+          </label>
+          <label for="radio" class="flex items-center inline-block">
+            <input type="radio" id="radio3" name="radio-group" class="form-radio text-indigo-600 h-5 w-5">
+            <span class="ml-2 text-gray-700">Radio Option</span>
+          </label>
+          <label for="radio" class="flex items-center inline-block">
+            <input type="radio" id="radio4" name="radio-group" class="form-radio text-indigo-600 h-5 w-5">
+            <span class="ml-2 text-gray-700">Radio Option</span>
+          </label>
+                  <!--Radios2-->   
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio5" name="radio-group2" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio6" name="radio-group2" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio7" name="radio-group2" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio8" name="radio-group2" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <!--Radios3-->
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio9" name="radio-group3" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio10" name="radio-group3" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio11" name="radio-group3" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+                  <label for="radio" class="flex items-center inline-block">
+                    <input type="radio" id="radio12" name="radio-group3" class="form-radio text-indigo-600 h-5 w-5">
+                    <span class="ml-2 text-gray-700">Radio Option</span>
+                  </label>
+        
+        
+        </div>
+
         <!-- Result Buttons -->
-        <div class="ml-4 flex flex-col">
-            <div class="mb-2 inline-block">
+        <div class="flex flex-col items-end mb-4 mr-4 justify-center">
+            <div class="mb-2">
                 <button class="bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
                     Button
                 </button>
@@ -98,7 +157,56 @@
                 </button>
             </div>
         </div>
+        <!--Drink Results Buttons-->
+        <div class="flex flex-col items-end mb-4 mr-4 justify-end">
+            <div class="mb-2">
+                <button class="bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                    Button
+                </button>
+            </div>
+            <div class="mb-2">
+                <button class="bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                    Button
+                </button>
+            </div>
+            <div class="mb-2">
+                <button class="bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                    Button
+                </button>
+            </div>
+            <div class="mb-2">
+                <button class="bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                    Button
+                </button>
+            </div>
+            <div class="mb-2">
+                <button class="bg-red-700 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">
+                    Button
+                </button>
+            </div>
+        </div>
+    
     </div>
+    <!--Saearch Button-->
+    <div class="mb-4 inline-block">
+        <div class="ml-auto mt-4 mr-4 inline-block">
+            <button class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Search
+            </button>
+        </div>
+    </div>
+
+    <!--Save Button-->
+    <div class="mb-4 inline-block">
+        <div class="ml-auto mt-4 mr-4 inline-block">
+            <button class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Save
+            </button>
+        </div>
+    </div>
+    <!--Output Card-->
+    <div class="min-h-screen flex justify-center items-center inline-block">
+        <!--
     <div class="min-h-screen flex justify-center items-center">
         <div class="max-w-sm rounded overflow-hidden shadow-lg absolute top-1/2 transform -translate-y-1/2">
           <img class="w-full" src= img url here alt=Card Image here
@@ -108,8 +216,13 @@
              content of card goes here
             </p>
           </div>
+
+        -->
+  </div>   
+
         </div>
       </div>
+
       <script src ="script.js"></script>
 </body>
 
