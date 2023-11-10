@@ -73,7 +73,6 @@ async function getMealList(mealCategory, drinkPairing, selectedDrinkCategory){
         }
     })
 }
-
 // Function for save button that puts it to local storage
 function saveMyCombo() {
     var savedFood = document.querySelector("#mealHeader").innerText;
@@ -115,10 +114,6 @@ document.addEventListener("DOMContentLoaded", function() {
         savedComboList.appendChild(listItem);
     }
 });
-
-
-
-
 //Locate the search button 
 var search = document.getElementById("search")
 
@@ -132,7 +127,7 @@ search.addEventListener("click", async function (){
     //Get a list of all radio buttons to test for true and to get their text values
     var buttonComplex = document.getElementById("radioContainer").children.length
     //Loop through the radio button list. If the value is true (checked) then take the text and store it as a variable, as well as reset the button
-    for(var i= 0; i< buttonComplex; i++){   
+    for(var i= 0; i< buttonComplex-3; i++){   
         var inputBox = document.getElementById("radio"+(i+1).toString()).parentNode.children
         if(inputBox[0].checked && drinkToMealMap.has(inputBox[1].innerHTML)){
             selectedItem = inputBox[1].innerHTML
@@ -147,6 +142,7 @@ search.addEventListener("click", async function (){
             inputBox[0].checked = false;
         }
     };
+    console.log(selectedItem)
     //Call the appropriate function to get the cocktail or meal based on previous input
     if(drinkToMealMap.has(selectedItem)){
         await getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
