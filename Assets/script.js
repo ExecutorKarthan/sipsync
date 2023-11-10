@@ -203,8 +203,3 @@ function goToSaved() {
 function returnHome() {
     window.location.href = "./index.html";
 }
-
-//Button to go to saved combos
-function goToSaved() {
-    window.location.href = "./saved-combos.html";
-}
