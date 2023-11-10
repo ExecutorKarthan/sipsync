@@ -73,8 +73,6 @@ async function getMealList(mealCategory, drinkPairing, selectedDrinkCategory){
         }
     })
 }
-
-
 // Function for save button that puts it to local storage
 function saveMyCombo() {
     var savedFood = document.querySelector("#mealHeader").innerText;
@@ -116,8 +114,6 @@ document.addEventListener("DOMContentLoaded", function() {
         savedComboList.appendChild(listItem);
     }
 });
-
-
 //Locate the search button 
 var search = document.getElementById("search")
 
@@ -206,4 +202,9 @@ function goToSaved() {
 // Home button function on the saved-combos HTML
 function returnHome() {
     window.location.href = "./index.html";
+}
+
+//Button to go to saved combos
+function goToSaved() {
+    window.location.href = "./saved-combos.html";
 }
