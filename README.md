@@ -16,7 +16,7 @@ We used the following applications in this project:
 https://ExecutorKarthan.github.io/sipsync/
 <br>
 Here is a GIF showing the programs functionality:
-![SipSync Demo GIF](/assets/SipSync%20Demo%20Video.gif)
+![SipSync Demo Video GIF](./Assets/SipSync%20Demo%20Video.gif)
 <br>
 <a href="./Assets/SipSync Demo Video.mp4">Link to the live video</a>
 
