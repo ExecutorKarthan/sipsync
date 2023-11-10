@@ -14,9 +14,13 @@ We used the following applications in this project:
 
 ## Deployed Application
 https://ExecutorKarthan.github.io/sipsync/
-
-SCREENSHOT OF APPLICATION
+Here is a GIF showing the programs functionality
+![5 Day Forecast Demo GIF](./assets/SipSync%20Demo%20Video.gif)
+<a href="./Assets/SipSync Demo Video.mp4">Link to the live video</a>
 
 ## Credits
 Cocktail API: https://www.thecocktaildb.com/api.php 
 Meal API: https://www.themealdb.com/api.php 
+Tailwind Css: https://tailwindcss.com/
+
+Special thanks goes out to the team of Jared Woodcock, Jared Fleshren and Alex Messina. This project was made possible through their combined efforts.
