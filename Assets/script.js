@@ -26,16 +26,26 @@ async function getCocktailOptions(selectedIngredient, selectedDrinkCategory, sel
         return response.json()
     }).then(function (data){
         //Determine the maximum length of items returned. If that value is larger than 5, set it to five. If not, only display what is present.
-        maxVal = data.drinks.length
+        var maxNum = data.drinks.length
+        var maxIndex = data.drinks.length
         var drinkButtonContainer = document.querySelector("#drinkResults").children
-        if(maxVal > 5){
-            maxVal = 5;
+        if(maxNum > 5){
+            maxNum = 5;
+        }
+        //Create a random array and populate it with random values to allow for a larger variety of drip options
+        var randomValArray = []
+        while (randomValArray.length != maxNum){
+            var randNum = Math.floor(Math.random()*maxIndex)
+            if(!randomValArray.includes(randNum)){
+                randomValArray.push(randNum)
+            }
         }
         //Set the buttons for the drinks to visible and write out the names
-        for(var i = 0; i < maxVal; i++){
-            cocktailIDs.set(data.drinks[i].strDrink, data.drinks[i].idDrink);
+        for(var i = 0; i < maxNum; i++){
+            var randomIndex = randomValArray.pop();
+            cocktailIDs.set(data.drinks[randomIndex].strDrink, data.drinks[randomIndex].idDrink);
             drinkButtonContainer[i].children[0].classList.remove("invisible")
-            drinkButtonContainer[i].children[0].innerHTML = data.drinks[i].strDrink;
+            drinkButtonContainer[i].children[0].innerHTML = data.drinks[randomIndex].strDrink;
         }
         //Flag the halt to true so it will not infinitely loop then call the meal function for the meal pairings
         if(!halt){
@@ -55,16 +65,26 @@ async function getMealList(mealCategory, drinkPairing, selectedDrinkCategory){
         return response.json();
     }).then(function (data){
         //Determine the maximum length of items returned. If that value is larger than 5, set it to five. If not, only display what is present.
-        maxVal = data.meals.length
+        var maxNum = data.meals.length
+        var maxIndex = data.meals.length
         var foodButtonContainer = document.querySelector("#mealResults").children
-        if(maxVal > 5){
-            maxVal = 5;
+        if(maxNum > 5){
+            maxNum = 5;
+        }
+        //Create a random array and populate it with random values to allow for a larger variety of drip options
+        var randomValArray = []
+        while (randomValArray.length != maxNum){
+            var randNum = Math.floor(Math.random()*maxIndex)
+            if(!randomValArray.includes(randNum)){
+                randomValArray.push(randNum)
+            }
         }
         //Set the buttons for the meals to visible and write out the names
-        for(var i = 0; i < maxVal; i++){
-            mealIDs.set(data.meals[i].strMeal, data.meals[i].idMeal);
+        for(var i = 0; i < maxNum; i++){
+            var randomIndex = randomValArray.pop();
+            mealIDs.set(data.meals[randomIndex].strMeal, data.meals[randomIndex].idMeal);
             foodButtonContainer[i].children[0].classList.remove("invisible")
-            foodButtonContainer[i].children[0].innerHTML = data.meals[i].strMeal;
+            foodButtonContainer[i].children[0].innerHTML = data.meals[randomIndex].strMeal;
         }
         //Flag the halt to true so it will not infinitely loop then call the drink function for the meal pairings
         if(!halt){
@@ -119,9 +139,7 @@ var search = document.getElementById("search")
 
 //Run the main function on click of the search button
 search.addEventListener("click", async function (){
-    console.log(localStorage.getItem("currentDrink"))
-    console.log(localStorage.getItem("currentMeal"))
-    console.log(localStorage)
+    halt = false;
     var selectedItem = "";
     var selectedDrinkCategory ="";
     //Get a list of all radio buttons to test for true and to get their text values
@@ -142,7 +160,6 @@ search.addEventListener("click", async function (){
             inputBox[0].checked = false;
         }
     };
-    console.log(selectedItem)
     //Call the appropriate function to get the cocktail or meal based on previous input
     if(drinkToMealMap.has(selectedItem)){
         await getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
@@ -152,7 +169,6 @@ search.addEventListener("click", async function (){
     }
     else{
         //Reset the halt value so the next submission can be done
-        halt = false;
         return
     }
 })
