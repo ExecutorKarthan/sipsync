@@ -14,8 +14,10 @@ We used the following applications in this project:
 
 ## Deployed Application
 https://ExecutorKarthan.github.io/sipsync/
-Here is a GIF showing the programs functionality
-![5 Day Forecast Demo GIF](./assets/SipSync%20Demo%20Video.gif)
+<br>
+Here is a GIF showing the programs functionality:
+![SipSync Demo GIF](./assets/SipSync%20Demo%20Video.gif)
+<br>
 <a href="./Assets/SipSync Demo Video.mp4">Link to the live video</a>
 
 ## Credits
