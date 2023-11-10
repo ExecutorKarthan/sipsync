@@ -79,6 +79,9 @@ var search = document.getElementById("search")
 
 //Run the main function on click of the search button
 search.addEventListener("click", async function (){
+    console.log(localStorage.getItem("currentDrink"))
+    console.log(localStorage.getItem("currentMeal"))
+    console.log(localStorage)
     var selectedItem = "";
     var selectedDrinkCategory ="";
     //Get a list of all radio buttons to test for true and to get their text values
@@ -102,21 +105,19 @@ search.addEventListener("click", async function (){
     //Call the appropriate function to get the cocktail or meal based on previous input
     if(drinkToMealMap.has(selectedItem)){
         await getCocktailOptions(selectedItem, selectedDrinkCategory, drinkToMealMap.get(selectedItem));
-        console.log("Drink picked")
     }
-    if(mealToDrinkMap.has(selectedItem)){
+    else if(mealToDrinkMap.has(selectedItem)){
         await getMealList(selectedItem, mealToDrinkMap.get(selectedItem), selectedDrinkCategory);
-        console.log("food picked")
     }
     else{
+        //Reset the halt value so the next submission can be done
+        halt = false;
         return
     }
-    //Reset the halt value so the next submission can be done
-    halt = false;
-    
 })
 
 drinkResults.addEventListener("click", async function(event){
+    localStorage.setItem("currentDrink", cocktailIDs.get(event.target.innerHTML))
     //Create a web query based on the item ID
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + cocktailIDs.get(event.target.innerHTML);
     //Query the website to get the needed cocktail data. Add an if to slow the request and prevent doubles
@@ -130,16 +131,14 @@ drinkResults.addEventListener("click", async function(event){
     })
 })
 
-console.log(mealResults)
 mealResults.addEventListener("click", async function(event){
+    localStorage.setItem("currentMeal", mealIDs.get(event.target.innerHTML))
     //Create a web query based on the item ID
     var idURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealIDs.get(event.target.innerHTML);
     //Query the website to get the needed cocktail data. Add an if to slow the request and prevent doubles
-    console.log(idURL)
     fetch(idURL).then(function(response){
         return response.json()
     }).then(function (data){
-        console.log(data)
         var title = document.getElementById("mealHeader")
         title.innerHTML = data.meals[0].strMeal
         var img = document.getElementById("mealIMG")
@@ -165,7 +164,6 @@ function saveMyCombo() {
     existingSavedPairings.push(savedPairing);
     // Store the updated list back in local storage
     localStorage.setItem("savedPairings", JSON.stringify(existingSavedPairings));
-
     resetChoices();
 }
 
